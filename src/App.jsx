@@ -65,7 +65,7 @@ function App() {
     <div className="w-full max-w-4xl mx-auto mt-10 flex flex-col justify-center items-center 50  bg-gray-300 rounded-xl p-6 shadow-2xl border border-white/40">
       <h1 className="text-4xl font-bold text-black mb-6">Weather App</h1>
       {/* Search */}
-      <div className="flex flex-col md:flex-row gap-4 w-full max-w-xl mb-6">
+      <div className="flex justify-center  w-full  mb-6">
         <SearchBar 
         setCity={fetchWeather}
         setForecast={setForecast}/>

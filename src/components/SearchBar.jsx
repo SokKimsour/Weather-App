@@ -30,8 +30,8 @@ export default function SearchBar({ setCity }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full max-w-md">
-      <div className="flex-1">
+    <form onSubmit={handleSubmit} className="flex w-[80%]">
+      <div className="flex-1 " >
         <AsyncSelect
           cacheOptions
           loadOptions={loadOptions}
