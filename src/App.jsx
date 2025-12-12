@@ -16,6 +16,7 @@ function App() {
       const res = await fetch(url);
       if (!res.ok) throw new Error("Forecast not found");
       const data = await res.json();
+      console.log(data)
       setForecast(data.list);
     } catch (err) {
       console.error(err);
@@ -65,7 +66,9 @@ function App() {
       <h1 className="text-4xl font-bold text-black mb-6">Weather App</h1>
       {/* Search */}
       <div className="flex flex-col md:flex-row gap-4 w-full max-w-xl mb-6">
-        <SearchBar setCity={fetchWeather} />
+        <SearchBar 
+        setCity={fetchWeather}
+        setForecast={setForecast}/>
       </div>
       {/* Current Weather */}
       <div className="w-full bg-blue-300 rounded-2xl shadow-2xl border border-gray-50 p-6 text-center mb-6">

@@ -3,7 +3,7 @@ export default function Forecast({ forecast }) {
 
   return (
     <div className="bg-gray-200 rounded-2xl w-full overflow-x-auto scrollbar-hide py-4">
-      <div className="flex space-x-4 px-2">
+      <div className="flex space-x-4 px-4">
         {forecast.map((item, index) => {
           const date = new Date(item.dt * 1000);
           const time = date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
