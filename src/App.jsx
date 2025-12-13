@@ -10,20 +10,20 @@ function App() {
   const [forecast, setForecast] = useState(null);
   const [loading, setLoading] = useState(false);
   const API_KEY = "b84e215a85abb5eea6c6f6b932ce58e8";
+
   async function fetchForecast(city) {
     try {
       const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error("Forecast not found");
       const data = await res.json();
-      console.log(data)
       setForecast(data.list);
     } catch (err) {
       console.error(err);
       setForecast(null);
     }
   }
-  async function fetchWeather(cityName) {
+  async function fetchData(cityName) {
     setLoading(true);
     setForecast(null);
     try {
@@ -67,7 +67,7 @@ function App() {
       {/* Search */}
       <div className="flex justify-center  w-full  mb-6">
         <SearchBar 
-        setCity={fetchWeather}
+        setCity={fetchData}
         setForecast={setForecast}/>
       </div>
       {/* Current Weather */}

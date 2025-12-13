@@ -12,7 +12,6 @@ export default function SearchBar({ setCity }) {
         `http://api.openweathermap.org/geo/1.0/direct?q=${inputValue}&limit=5&appid=${API_KEY}`
       );
       const data = await res.json();
-
       return data.map((item) => ({
         value: { lat: item.lat, lon: item.lon },
         label: `${item.name}, ${item.country}`,

@@ -1,6 +1,4 @@
 export default function Forecast({ forecast }) {
-  if (!forecast) return null;
-
   return (
     <div className="bg-gray-200 rounded-2xl w-full overflow-x-auto scrollbar-hide py-4">
       <div className="flex space-x-4 px-4">
@@ -21,7 +19,6 @@ export default function Forecast({ forecast }) {
                 className="mx-auto w-20 h-20 mb-2"
               />
               <p className="text-white font-bold text-lg">{Math.round(item.main.temp)}°C</p>
-              <p className="text-white/80 text-sm capitalize">{item.weather[0].description}</p>
             </div>
           );
         })}
