@@ -1,6 +1,4 @@
 import { useState } from "react";
-
-// Predefined list of cities
 const cities = [
   "London, UK",
   "Paris, France",
@@ -11,7 +9,6 @@ const cities = [
   "Berlin, Germany",
   "Moscow, Russia",
 ];
-
 export default function SearchBar({ setCity }) {
   const [inputValue, setInputValue] = useState("");
   const [filteredCities, setFilteredCities] = useState([]);
