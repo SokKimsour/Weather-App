@@ -1,53 +1,81 @@
 import { useState } from "react";
-import AsyncSelect from "react-select/async";
 
-const API_KEY = "b84e215a85abb5eea6c6f6b932ce58e8";
+// Predefined list of cities
+const cities = [
+  "London, UK",
+  "Paris, France",
+  "Tokyo, Japan",
+  "New York, USA",
+  "Phnom Penh, Cambodia",
+  "Sydney, Australia",
+  "Berlin, Germany",
+  "Moscow, Russia",
+];
 
 export default function SearchBar({ setCity }) {
   const [inputValue, setInputValue] = useState("");
-  const loadOptions = async (inputValue) => {
-    if (!inputValue) return [];
-    try {
-      const res = await fetch(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${inputValue}&limit=5&appid=${API_KEY}`
+  const [filteredCities, setFilteredCities] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    if (value) {
+      const filtered = cities.filter((city) =>
+        city.toLowerCase().includes(value.toLowerCase())
       );
-      const data = await res.json();
-      return data.map((item) => ({
-        value: { lat: item.lat, lon: item.lon },
-        label: `${item.name}, ${item.country}`,
-      }));
-    } catch (err) {
-      console.error(err);
-      return [];
+      setFilteredCities(filtered);
+      setShowDropdown(true);
+    } else {
+      setFilteredCities([]);
+      setShowDropdown(false);
     }
   };
+
+  const handleSelect = (city) => {
+    setCity(city);
+    setInputValue("");
+    setFilteredCities([]);
+    setShowDropdown(false);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!inputValue) return;
-    setCity(inputValue);
+    if (inputValue) setCity(inputValue);
     setInputValue("");
+    setFilteredCities([]);
+    setShowDropdown(false);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-[80%]">
-      <div className="flex-1 " >
-        <AsyncSelect
-          cacheOptions
-          loadOptions={loadOptions}
-          defaultOptions
-          onChange={(selected) => {
-            if (selected) setCity(selected.label);
-          }}
-          onInputChange={(val) => setInputValue(val)}
-          placeholder="Search for a city..."
-        />
-      </div>
+    <form onSubmit={handleSubmit} className="relative flex w-[80%]">
+      <input
+        type="text"
+        value={inputValue}
+        onChange={handleChange}
+        placeholder="Search for a city..."
+        className="w-full p-2 border rounded-md"
+      />
       <button
         type="submit"
         className="bg-blue-500 text-white p-2 ml-2 rounded-md"
       >
         Search
       </button>
+
+      {showDropdown && filteredCities.length > 0 && (
+        <ul className="absolute top-full left-0 w-full bg-white border rounded-md shadow-md z-10">
+          {filteredCities.map((city, index) => (
+            <li
+              key={index}
+              className="p-2 hover:bg-blue-100 cursor-pointer"
+              onClick={() => handleSelect(city)}
+            >
+              {city}
+            </li>
+          ))}
+        </ul>
+      )}
     </form>
   );
 }
