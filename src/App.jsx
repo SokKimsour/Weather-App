@@ -66,32 +66,36 @@ function App() {
   }, []);
 
   return (
-    <div className="w-full max-w-4xl mx-auto mt-10 flex flex-col justify-center items-center bg-gray-300 rounded-xl p-6 shadow-2xl border border-white/40">
-      <h1 className="text-4xl font-bold text-black mb-6">Weather App</h1>
+    <div className="relative h-screen w-full overflow-hidden flex justify-center items-center bg-[url('src/assets/pexels-pixabay-53594.jpg')] bg-cover bg-center "> 
+      <div className="w-full max-w-4xl flex flex-col justify-center items-center 
+                bg-white/20 backdrop-blur-md rounded-xl p-6 shadow-2xl 
+                border border-white/30">
+        <h1 className="text-4xl font-bold text-black mb-6">Weather App</h1>
 
-      {/* Search */}
-      <div className="flex justify-center w-full mb-6">
-        <SearchBar setCity={fetchData} setForecast={setForecast} />
-      </div>
+        {/* Search */}
+        <div className="flex justify-center w-full mb-6">
+          <SearchBar setCity={fetchData} setForecast={setForecast} />
+        </div>
 
-      {/* Current Weather */}
-      <div className="w-full bg-blue-300 rounded-2xl shadow-2xl border border-gray-50 p-6 text-center mb-6">
-        {loading ? (
-          <Loading />
-        ) : weather ? (
-          <CurrentWeather weather={weather} />
-        ) : (
-          <p className="text-white text-lg">Please search for a city.</p>
-        )}
-      </div>
+        {/* Current Weather */}
+        <div className="w-full bg-blue-300 rounded-2xl shadow-2xl border border-gray-50 p-6 text-center mb-6">
+          {loading ? (
+            <Loading />
+          ) : weather ? (
+            <CurrentWeather weather={weather} />
+          ) : (
+            <p className="text-white text-lg">Please search for a city.</p>
+          )}
+        </div>
 
-      {/* Forecast */}
-      <div className="w-full">
-        {loading && !forecast ? (
-          <Loading />
-        ) : (
-          forecast && <Forecast forecast={forecast} />
-        )}
+        {/* Forecast */}
+        <div className="w-full">
+          {loading && !forecast ? (
+            <Loading />
+          ) : (
+            forecast && <Forecast forecast={forecast} />
+          )}
+        </div>
       </div>
     </div>
   );
