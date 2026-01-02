@@ -66,25 +66,28 @@ function App() {
   }, []);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden flex justify-center items-center bg-[url('src/assets/pexels-pixabay-53594.jpg')] bg-cover bg-center "> 
-      <div className="w-full max-w-4xl flex flex-col justify-center items-center 
-                bg-white/20 backdrop-blur-md rounded-xl p-6 shadow-2xl 
-                border border-white/30">
-        <h1 className="text-4xl font-bold text-black mb-6">Weather App</h1>
+    <div className="relative h-screen w-full overflow-hidden flex justify-center items-center bg-[url('src/assets/pexels-pixabay-53594.jpg')] bg-cover bg-center">
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+
+      <div className="relative w-full max-w-4xl flex flex-col justify-center items-center 
+                bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl 
+                border border-white/20 z-10 m-4 max-h-[90vh] overflow-y-auto scrollbar-hide">
+        <h1 className="text-5xl font-bold text-white mb-8 tracking-wide drop-shadow-lg">Weather App</h1>
 
         {/* Search */}
-        <div className="flex justify-center w-full mb-6">
+        <div className="flex justify-center w-full mb-8">
           <SearchBar setCity={fetchData} setForecast={setForecast} />
         </div>
 
         {/* Current Weather */}
-        <div className="w-full bg-blue-300 rounded-2xl shadow-2xl border border-gray-50 p-6 text-center mb-6">
+        <div className="w-full bg-white/10 rounded-3xl shadow-lg border border-white/10 p-6 text-center mb-8 transform transition-all hover:bg-white/15">
           {loading ? (
             <Loading />
           ) : weather ? (
             <CurrentWeather weather={weather} />
           ) : (
-            <p className="text-white text-lg">Please search for a city.</p>
+            <p className="text-white text-xl font-light">Search for a city to get started.</p>
           )}
         </div>
 

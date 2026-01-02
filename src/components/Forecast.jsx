@@ -11,29 +11,29 @@ export default function Forecast({ forecast }) {
   }
 
   return (
-    <div className="bg-gray-200 rounded-2xl w-full overflow-x-auto scrollbar-hide py-4">
-      <div className="flex space-x-4 px-4">
+    <div className="w-full overflow-x-auto scrollbar-hide py-4">
+      <div className="flex space-x-4 px-2">
         {daily.map((item, index) => {
           const date = new Date(item.dt * 1000);
           const day = date.toLocaleDateString("en-US", {
-            weekday: "long",
+            weekday: "short",
           });
 
           return (
             <div
               key={index}
-              className="flex-shrink-0 w-36 bg-blue-300 rounded-2xl p-4 text-center shadow-md hover:scale-105 transition-transform duration-200"
+              className="flex-shrink-0 w-32 bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center border border-white/10 hover:bg-white/20 transition-all duration-300 transform"
             >
-              <p className="font-semibold text-white mb-2">{day}</p>
+              <p className="font-medium text-white/90 mb-2 text-sm uppercase tracking-wide">{day}</p>
 
               <img
                 src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
                 alt={item.weather[0].description}
-                className="mx-auto w-20 h-20 mb-2"
+                className="mx-auto w-12 h-12 mb-2 drop-shadow-md"
               />
 
-              <p className="text-white font-bold text-lg">
-                {Math.round(item.main.temp)}°C
+              <p className="text-white font-bold text-xl">
+                {Math.round(item.main.temp)}°
               </p>
             </div>
           );
